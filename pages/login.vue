@@ -4,8 +4,8 @@
 </div>
 
 <div class="form-center">
-    <input type="email" placeholder="Enter your email" id="email" /><br /><br />
-    <input type="text" placeholder="Enter your password" id="password" /><br /><br />
+    <input type="email" placeholder="Enter your email" id="email" v-model="state.email"/><br /><br />
+    <input type="text" placeholder="Enter your password" id="password" v-model="state.password"/><br /><br />
     <button class="login" type="button" v-on:click="login()">Login</button>
 </div>
 
@@ -14,7 +14,56 @@
 </div>
 </template>
 
-<script setup>
+<script>
+import axios from 'axios';
+import {reactive} from 'vue';
+import { useRouter } from 'vue-router';
+export default{
+    name:'loginComp',
+    setup(){
+        const router = useRouter();
+        const state = reactive({
+            email:'',
+            password:''
+        });
+        async function login(){
+            let emailID = state.email;
+            let pword = state.password;
+            await axios.get("/api/login/" + emailID)
+                .then((res) => {
+                    let result = res.data.data;
+                    if (result.length > 0) {
+                        if ((result[0].user_password == pword) && (res.status == 200)) {
+                            localStorage.setItem("user-name", JSON.stringify(result[0].first_name));
+                            localStorage.setItem("user-id", JSON.stringify(result[0].user_id));
+                            localStorage.setItem("isAdmin", JSON.stringify(result[0].isAdmin));
+                            alert('Login Successfull');
+                            if(result[0].isAdmin == 'true'){
+                                router.push('/admin')
+                            }else{
+                                router.push('/loggedin/dashboard')
+                            }
+                        } else {
+                            alert("Incorrect password");
+                            state.password = '';
+                        }
+                    } else {
+                        alert("Account doesn't exist. Please enter proper details");
+                        state.email = ''
+                        state.password = '';
+                    }
+                })
+        }
+        function homePage(){
+            return router.push('/')
+        }
+        return{
+            state,
+            homePage,
+            login
+        }
+    }
+}
 
 </script>
 

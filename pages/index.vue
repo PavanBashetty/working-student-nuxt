@@ -4,12 +4,18 @@
 </div>
 
 <div>
-    <button class="signup" type="button">SignUp</button><br /><br />
-    <button class="login" v-on:click="loginPage()" type="button">Login</button><br /><br />
+    <!-- <button class="signup" type="button">SignUp</button><br /><br /> -->
+    <!-- <button class="login" v-on:click="loginPage()" type="button">Login</button><br /><br /> -->
+    
+    <NuxtLink to="/signup">SignUp</NuxtLink>
+    <NuxtLink to="/login">Login</NuxtLink>
+ 
+    <!-- <NuxtLink to="/login">Login</NuxtLink> -->
 </div>
 
 <footer>
-    <button type="button">AboutUs</button>
+    <!-- <button type="button">AboutUs</button> -->
+    <NuxtLink to="/about" >AboutUs</NuxtLink>
 </footer>
 </template>
 

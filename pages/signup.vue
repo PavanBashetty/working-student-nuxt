@@ -5,12 +5,12 @@
 
 <div class="form-center">
 
-    <input type="text" placeholder="Enter First Name" id="firstName" v-model="firstName" /><br /><br />
-    <input type="text" placeholder="Enter Last Name" id="lastName" v-model="lastName" /><br /><br />
-    <input type="number" placeholder="Enter Age" id="age" v-model="age" /><br /><br />
-    <input type="text" placeholder="Enter University" id="university" v-model="university" /><br /><br />
-    <input type="email" placeholder="Enter Email ID" id="email" v-model="email" /><br /><br />
-    <input type="text" placeholder="Enter Password" id="password" v-model="password" /><br /><br />
+    <input type="text" placeholder="Enter First Name" id="firstName" v-model="state.firstName" /><br /><br />
+    <input type="text" placeholder="Enter Last Name" id="lastName" v-model="state.lastName" /><br /><br />
+    <input type="number" placeholder="Enter Age" id="age" v-model="state.age" /><br /><br />
+    <input type="text" placeholder="Enter University" id="university" v-model="state.university" /><br /><br />
+    <input type="email" placeholder="Enter Email ID" id="email" v-model="state.email" /><br /><br />
+    <input type="text" placeholder="Enter Password" id="password" v-model="state.password" /><br /><br />
     <button class="submit" type="button" v-on:click="submitData()">Submit</button>
 </div>
 
@@ -19,7 +19,63 @@
 </div>
 </template>
 
-<script setup>
+<script>
+import axios from 'axios'
+import {reactive} from 'vue';
+import { useRouter } from 'vue-router';
+export default{
+    name:'signUpPage',
+    setup(){
+        const router = useRouter();
+        const state = reactive({
+            firstName:'pavan',
+            lastName:'bashetty',
+            age:'',
+            university:'',
+            email:'',
+            password:''
+        });
+        async function submitData(){
+            await axios.post("/api/signup",{
+                firstName: this.firstName,
+                lastName: this.lastName,
+                age: this.age,
+                university: this.university,
+                email: this.email,
+                password: this.password
+            }).then((res) => {
+                if (res.data.msg == "user registered successfully!") {
+                    alert("Registration successfull!");
+                    router.push('/login')
+                } else {
+                    alert("Registration did not happen. Please try again!");
+                    this.firstName = '',
+                        this.lastName = '',
+                        this.age = '',
+                        this.university = '',
+                        this.email = '',
+                        this.password = ''
+                }
+            }).catch(() => {
+                alert("Registration failed. Please try after sometime");
+                this.firstName = '',
+                    this.lastName = '',
+                    this.age = '',
+                    this.university = '',
+                    this.email = '',
+                    this.password = ''
+            })
+        }
+        function homePage(){
+            return router.push('/')
+        }
+        return{
+            state,
+            submitData,
+            homePage
+        }
+    }
+}
 </script>
 
 <style scoped>
