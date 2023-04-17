@@ -1,46 +1,29 @@
 <template>
 <div>
-    <ul>
-        <li v-for="user in users" :key="user">
-        {{ user }}</li>
-    </ul>
+About Us
 </div>
+
+<footer>
+    <NuxtLink to="/" >Back</NuxtLink>
+</footer>
 </template>
 
 <script>
-import db from '../server/db.js';
-import {
-    ref
-} from 'vue';
-export default {
-    name: 'aboutComp',
-    setup() {
-        const users = ref([]);
-
-       async function getData({
-            error
-        }) {
-            try {
-                users.value = await db.query('SELECT user_id FROM userCredentials;')
-                return {
-                    users
-                }
-            } catch (err) {
-                console.error(err)
-                error({
-                    statusCode: 500,
-                    message: 'Failed to fetch users'
-                })
-            }
-        }
-        return{
-            users,
-            getData
-        }
-    }
+export default{
+    name:'aboutUsComp'
 }
-
 </script>
 
-<style>
+<style scoped>
+footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 10px;
+    background-color: DarkSalmon;
+    color: white;
+}
 </style>

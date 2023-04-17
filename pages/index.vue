@@ -1,14 +1,14 @@
 <template>
-<div style="background-color:brown; padding: 10px">
-    <h1 style="text-align:center">Welcome to Working Student App</h1>
+<div class="text-center" style="background-color:brown; padding: 30px">
+    <h1 class="self-center text-2xl font-bold whitespace-nowrap dark:text-blue">Welcome to Working Student App</h1>
 </div>
 
-<div>
+<div class="flex h-screen items-center justify-center">
     <!-- <button class="signup" type="button">SignUp</button><br /><br /> -->
     <!-- <button class="login" v-on:click="loginPage()" type="button">Login</button><br /><br /> -->
     
-    <NuxtLink to="/signup">SignUp</NuxtLink>
-    <NuxtLink to="/login">Login</NuxtLink>
+    <NuxtLink to="/signup" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-1 mb-1">SignUp</NuxtLink>
+    <NuxtLink to="/login" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-1 mb-1">Login</NuxtLink>
  
     <!-- <NuxtLink to="/login">Login</NuxtLink> -->
 </div>
@@ -34,24 +34,5 @@ footer {
     padding: 10px;
     background-color: DarkSalmon;
     color: white;
-}
-.signup, .login{
-    background-color:bisque;
-    border:1px;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    position: absolute;
-    top: 25%;
-    left: 46%;
-}
-.login{
-    top: 35%;
-    left: 46%;
 }
 </style>

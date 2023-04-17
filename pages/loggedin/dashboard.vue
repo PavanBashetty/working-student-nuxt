@@ -1,11 +1,19 @@
 <template>
-    dashboard 
+    <loggedIn subHeaderName = "Dashboard" />
+     Dashboard
+    
 </template>
 
 <script>
-definePageMeta({
-    layout: 'loggedin'
-})
+import loggedIn from '~/layouts/loggedin.vue'
+// definePageMeta({
+//     layout: 'loggedin'
+// })
+export default{
+    components:{
+        loggedIn
+    }
+}
 </script>
 
 <style scoped>
